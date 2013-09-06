@@ -12,7 +12,7 @@
 	<description>Example to get started JPA</description>
 	
 	<!-- inject property file into String context -->
-	<context:property-placeholder location="classpath:sspring_db.properties" />
+	<context:property-placeholder location="classpath:spring_db.properties" />
 
 	<!-- We create common simple pool of connection to DB -->
 	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"

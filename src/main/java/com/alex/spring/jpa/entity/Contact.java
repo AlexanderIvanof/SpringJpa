@@ -11,7 +11,7 @@ import javax.persistence.*;
 @Table(name = "contact")
 @NamedQueries({
 	@NamedQuery(name = "Contact.findAll",
-			query= "select t fromContact t"),
+			query= "select t from Contact t"),
 	@NamedQuery(name = "Contact.findById",
 			query = "select distinct c from Contact c left join fetch c.contactTelDetail t"
 	+ " left join fetch c.hobbies h where c.id = :id"),
