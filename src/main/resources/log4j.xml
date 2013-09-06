@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE log4j:configuration PUBLIC "-//LOG4J//DTD LOG4J//EN" "http://logging.apache.org/log4j/1.2/apidocs/org/apache/log4j/xml/doc-files/log4j.dtd" >
+<log4j:configuration xmlns:log4j="http://jakarta.apache.org/log4j/">
+	<appender name="STDOUT" class="org.apache.log4j.ConsoleAppender">
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss,SSS} %-5p %c.%M.%L - %m%n" />
+		</layout>
+	</appender>
+
+	<appender name="email" class="org.apache.log4j.net.SMTPAppender">
+		<param name="BufferSize" value="512" />
+		<param name="SMTPHost" value="smtp" />
+		<param name="SMTPUsername" value="alexandr.ivanov@nadrabank.kiev.ua" />
+		<param name="SMTPPassword" value="040385" />
+		<param name="From" value="alexandr.ivanov@nadrabank.kiev.ua" />
+		<param name="To" value="recycle.for@mail.ru" />
+		<param name="Threshold" value="error" />
+		<param name="Subject" value="Have an Error in myApp" />
+		<layout class="org.apache.log4j.PatternLayout">
+			<param name="ConversionPattern" value="%d{dd-MM-yyyy HH:mm:ss,SSS} %-5p %c.%M.%L - %m%n" />
+		</layout>
+		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="error" />
+			<param name="LevelMax" value="fatal" />
+		</filter>
+	</appender>
+	
+	<appender name="DB" class="org.apache.log4j.jdbc.JDBCAppender">
+		<param name="URL" value="jdbc:mysql://localhost:3306/log"/>
+   		<param name="driver" value="com.mysql.jdbc.Driver"/>
+   		<param name="user" value="root"/>
+	   	<param name="password" value="040385"/>
+   		<param name="sql" value="INSERT INTO log4j_tbl(user_id, level, date, logger, message) \
+   		                         VALUES('%x','%p','%d{yyyy-MM-dd HH:mm:ss}','%C.%M:%L','%m')"/>
+   		<filter class="org.apache.log4j.varia.LevelRangeFilter">
+			<param name="LevelMin" value="info" />
+			<param name="LevelMax" value="fatal" />
+		</filter>
+	</appender>
+	
+	<!--<logger name="my.email.logger">
+		<level value="ERROR" />
+		<appender-ref ref="email" />
+	</logger>-->
+	
+	<logger name="my.db" additivity="false">
+		<level value="ALL" />
+		<appender-ref ref="DB" />
+	</logger>
+	
+	<logger name="com.alex.spring.run"> <!-- additivity="false"-->
+		<level value="INFO" />
+		<appender-ref ref="STDOUT"/>
+	</logger>
+	
+	<root>
+		<!-- OFF< TRACE< DEBUG< INFO< WARN< ERROR< FATAL< ALL -->
+		<priority value="DEBUG" />
+		<appender-ref ref="STDOUT" />
+	</root>
+</log4j:configuration>
