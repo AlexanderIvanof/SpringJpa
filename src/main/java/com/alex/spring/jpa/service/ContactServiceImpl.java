@@ -45,13 +45,11 @@ public class ContactServiceImpl implements ContactService {
 
 	@Override
 	public Contact save(Contact contact) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
 	public void delete(Contact contact) {
-		// TODO Auto-generated method stub
 
 	}
 

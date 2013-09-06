@@ -64,8 +64,7 @@ public class Contact implements Serializable {
 	}
 
 	/**
-	 * @param version
-	 *            the version to set
+	 * @param version  the version to set
 	 */
 	public void setVersion(int version) {
 		this.version = version;
@@ -96,8 +95,7 @@ public class Contact implements Serializable {
 	}
 
 	/**
-	 * @param lastName
-	 *            the lastName to set
+	 * @param lastName  the lastName to set
 	 */
 	public void setLastName(String lastName) {
 		this.lastName = lastName;
@@ -113,8 +111,7 @@ public class Contact implements Serializable {
 	}
 
 	/**
-	 * @param birthDate
-	 *            the birthDate to set
+	 * @param birthDate the birthDate to set
 	 */
 	public void setBirthDate(Date birthDate) {
 		this.birthDate = birthDate;
@@ -129,8 +126,7 @@ public class Contact implements Serializable {
 	}
 
 	/**
-	 * @param contactTelDetail
-	 *            the contactTelDetail to set
+	 * @param contactTelDetail the contactTelDetail to set
 	 */
 	public void setContactTelDetail(Set<ContactTelDetail> contactTelDetail) {
 		this.contactTelDetail = contactTelDetail;
@@ -149,14 +145,15 @@ public class Contact implements Serializable {
 	 * @return the hobbies
 	 */
 	@ManyToMany
-	@JoinTable(name = "contact_hobby_detail", joinColumns = @JoinColumn(name = "contact_id"), inverseJoinColumns = @JoinColumn(name = "hobby_id"))
+	@JoinTable(name = "contact_hobby_detail",
+		joinColumns = @JoinColumn(name = "contact_id"), 
+		inverseJoinColumns = @JoinColumn(name = "hobby_id"))
 	public Set<Hobby> getHobbies() {
 		return hobbies;
 	}
 
 	/**
-	 * @param hobbies
-	 *            the hobbies to set
+	 * @param hobbies the hobbies to set
 	 */
 	public void setHobbies(Set<Hobby> hobbies) {
 		this.hobbies = hobbies;
