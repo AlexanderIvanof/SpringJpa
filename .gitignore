@@ -5,4 +5,5 @@ target/
 .project
 .springBeans
 .settings/
+/src/main/java/com/alex/spring/running/ASD.java
 README.md
