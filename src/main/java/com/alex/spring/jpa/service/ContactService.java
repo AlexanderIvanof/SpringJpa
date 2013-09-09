@@ -6,6 +6,8 @@ import com.alex.spring.jpa.entity.Contact;
 
 public interface ContactService {
 
+	public List<Contact> listOfContactsByNative();
+	
 	public List<Contact> findAll();
 
 	public List<Contact> findAllWithDetail();

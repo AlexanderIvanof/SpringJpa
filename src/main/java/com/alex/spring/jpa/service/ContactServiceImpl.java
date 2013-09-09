@@ -23,6 +23,12 @@ public class ContactServiceImpl implements ContactService {
 	@PersistenceContext
 	private EntityManager em;
 	
+	@SuppressWarnings("unchecked")
+	public List<Contact> listOfContactsByNative(){
+		String NATIVE_SQL_QUERY = "select * from contact"; // SQL query
+		return em.createNativeQuery(NATIVE_SQL_QUERY, Contact.class).getResultList();
+	}
+	
 	@Override
 	@Transactional(readOnly = true)
 	public List<Contact> findAll() {
@@ -45,12 +51,21 @@ public class ContactServiceImpl implements ContactService {
 
 	@Override
 	public Contact save(Contact contact) {
-		return null;
+		if(contact.getId() == -1){
+			log.info("insert new contact: " + contact.getFirstName() + ", " + contact.getLastName());
+			em.persist(contact);
+		} else {
+			log.info("Updating contact with id=" + contact.getId());
+			em.merge(contact);
+		}
+		return contact;
 	}
 
 	@Override
 	public void delete(Contact contact) {
-
+		Contact cnt = em.merge(contact);
+		em.remove(cnt);
+		log.info("Object was delete");
 	}
 
 }
